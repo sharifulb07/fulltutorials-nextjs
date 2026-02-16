@@ -1,8 +1,8 @@
 // parallel data fetching
 
-// get users
+// get users with cache
 async function getUsers() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users");
+  const res = await fetch("https://jsonplaceholder.typicode.com/users", {cache:"force-cache"});
   if (!res.ok) {
     throw new Error("User not Found ");
   }
@@ -11,7 +11,7 @@ async function getUsers() {
 
 // get posts
 async function getPosts() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts", {cache:"no-store"});
   if (!res.ok) {
     throw new Error("Post not Found");
   }
@@ -19,7 +19,7 @@ async function getPosts() {
 }
 // get comments
 async function getComments() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/comments");
+  const res = await fetch("https://jsonplaceholder.typicode.com/comments", {next:{revalidate:60}});
   if (!res.ok) {
     throw new Error("Comment not found ");
   }
